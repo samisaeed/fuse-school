@@ -17,13 +17,26 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 const appRoutes: Routes = [
     {
-        path      : '**',
-        redirectTo: 'sample'
-    }
+        path: '',
+        loadChildren: './main/setup/setup.module#SetupModule',
+    },
+    {
+        path: 'signin',
+        loadChildren: './main/authentication/authentication.module#AuthenticationModule'
+    },
+    {
+        path: 'setup',
+        loadChildren: './main/setup/setup.module#SetupModule',
+    },
+    {
+        path: 'dashboard',
+        loadChildren: './main/dash-board/dash-board.module#DashBoardModule',
+    },
 ];
 
 @NgModule({
@@ -54,7 +67,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatCheckboxModule
     ],
     bootstrap   : [
         AppComponent
