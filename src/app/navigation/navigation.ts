@@ -16,7 +16,7 @@ export const navigation: FuseNavigation[] = [
     {
         id: 'setup',
         title: 'Setup',
-        type: 'group',
+        type: 'collapsable',
         children: [
             {
                 id: 'divisions',

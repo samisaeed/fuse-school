@@ -38,7 +38,7 @@ export class SignInComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _authService: AuthService,
         private _fuseNavigationService: FuseNavigationService,
-        // private _snackBar: MatSnackBar,
+        private _snackBar: MatSnackBar,
         private _router: Router,
     ) {
         // Configure the layout
@@ -67,28 +67,28 @@ export class SignInComponent implements OnInit {
         });
     }
 
-    onFormSubmit({value: {name, password}}): void {
+    onFormSubmit({value: {username, password}}): void {
         this._verifying = true;
 
-        this._authService.signIn(name, password).subscribe(({data}) => {
+        this._authService.signIn(username, password).subscribe(({data}) => {
             const payload = JSON.parse(atob(data.access_token.original.access_token.split('.')[1]));
             this._verifying = false;
             this._authService.setAuthInfoInLocalStorage(data.access_token, payload);
 
-            this._router.navigate(['/employee']);
+            this._router.navigate(['/dashboard']);
         }, error => {
-            // this.openSnackBar(error.statusText);
+            this.openSnackBar(error.statusText);
             this._verifying = false;
             this.loginForm.reset();
         });
     }
 
-    // openSnackBar(message): void {
-    //     this._snackBar.open(message, 'close', {
-    //         duration: 5000,
-    //         horizontalPosition: 'end',
-    //         verticalPosition: 'bottom',
-    //     });
-    // }
+    openSnackBar(message): void {
+        this._snackBar.open(message, 'close', {
+            duration: 5000,
+            horizontalPosition: 'end',
+            verticalPosition: 'bottom',
+        });
+    }
 
 }

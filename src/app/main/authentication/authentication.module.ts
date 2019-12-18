@@ -9,6 +9,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {FlexModule} from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {AuthService} from './services/auth.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
     {
@@ -22,13 +26,19 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
+        MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
-        ReactiveFormsModule,
         MatIconModule,
-        FlexModule,
         MatInputModule,
-        MatButtonModule
+        ReactiveFormsModule,
+        FlexModule,
+        MatCardModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+    ],
+    providers: [
+        AuthService
     ]
 })
 export class AuthenticationModule { }

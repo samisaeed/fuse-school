@@ -4,7 +4,9 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr       : false,
+    baseUrl: 'http://61.247.188.124:9002/api/',
+
 };
 
 /*

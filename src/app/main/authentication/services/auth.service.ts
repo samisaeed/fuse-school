@@ -5,7 +5,7 @@ import {environment} from '../../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
     private readonly _baseUrl;
@@ -16,12 +16,11 @@ export class AuthService {
 
     constructor(private _http: HttpClient,
                 private _router: Router) {
-        // this._baseUrl = environment.baseUrl;
+        this._baseUrl = environment.baseUrl;
     }
 
-    // @ts-ignore
     signIn(name: string, password: string): Observable<any> {
-        // return this._http.post<any>(`${this._baseUrl}login`, {name, password});
+        return this._http.post<any>(`${this._baseUrl}login`, {name, password});
     }
 
     getRefreshToken(): Observable<any> {
@@ -30,15 +29,20 @@ export class AuthService {
 
     setAuthInfoInLocalStorage(accessToken, payload): void {
         localStorage.clear();
-        this.expiresIn = accessToken.original.expires_in;
         localStorage.setItem('auth', JSON.stringify({
-            access_token: accessToken.original.access_token,
-            name: payload.name,
-            staff_id: payload.staff_id,
-            group_id: payload.group_id,
-            role_id: payload.role_id,
-            expires_in: accessToken.original.expires_in,
+            accessToken: accessToken,
+            username: payload.username,
+            phone: payload.phone,
+            roleId: payload.role_id,
             loggedIn: true
         }));
+    }
+
+    get authInfo(): any {
+        return JSON.parse(localStorage.getItem('auth'));
+    }
+
+    get loggedInStatus(): boolean {
+        return this.authInfo && this.authInfo.loggedIn ? this.authInfo.loggedIn : false;
     }
 }

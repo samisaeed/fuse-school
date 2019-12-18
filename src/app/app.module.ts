@@ -17,8 +17,8 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 const appRoutes: Routes = [
     {
